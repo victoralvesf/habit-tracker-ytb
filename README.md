@@ -1,2 +1,2 @@
 # Habit Tracker
-# habit-tracker-ytb
+Sistema de acompanhamento de hábitos simples e eficiente para ajudar você a monitorar e melhorar seus hábitos diários.
