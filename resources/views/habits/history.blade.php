@@ -1,7 +1,21 @@
 <x-layout>
   <main class="max-w-5xl mx-auto py-10 min-h-[calc(100vh-160px)] px-4">
 
+    {{-- NAVBAR --}}
     <x-navbar />
+
+    {{-- YEAR SELECTION --}}
+    <div class="my-4">
+      @foreach($avaliableYears as $y)
+        <a
+          href="{{ route('habits.history', $y) }}"
+          class="habit-btn habit-shadow-lg p-2 inline-block
+          {{ $selectedYear == $y ? 'bg-habit-orange' : 'bg-white' }}"
+        >
+          {{ $y }}
+        </a>
+      @endforeach
+    </div>
 
     {{-- HISTORICO --}}
     @forelse($habits as $habit)

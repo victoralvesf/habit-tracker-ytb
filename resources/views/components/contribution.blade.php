@@ -8,19 +8,14 @@
 @endphp
 
 <div class="mb-6">
-  {{-- NOME + ANO --}}
-  <div class="flex items-center justify-between mb-3">
-    <h2 class="font-bold text-lg">
-      {{ $habit->name }}
-    </h2>
-    <span class="text-sm text-gray-600 font-semibold">
-      {{ $selectedYear }}
-    </span>
-  </div>
+  <h2 class="font-bold text-lg">
+    {{ $habit->name }}
+  </h2>
 
   {{-- GRID --}}
   <div class="bg-orange-50 p-2 habit-shadow-lg">
     <div class="flex gap-1 justify-between w-full">
+
       @foreach($weeks as $week)
         <div class="flex flex-col gap-1">
           @foreach($week as $day)
