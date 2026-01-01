@@ -7,7 +7,6 @@ use App\Models\Habit;
 use App\Models\HabitLog;
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -81,7 +80,7 @@ class HabitController extends Controller
 
         return redirect()
             ->route('habits.index')
-            ->with('success', 'Hábito removido com sucesso!');
+            ->with('warning', 'Hábito removido com sucesso!');
     }
 
     public function settings()
@@ -95,33 +94,30 @@ class HabitController extends Controller
     {
         $this->authorize('toggle', $habit);
 
-        // 2.Pegar a data de hoje
         $today = Carbon::today()->toDateString();
 
-        // 2.1 Pegar o log
         $log = HabitLog::query()
             ->where('habit_id', $habit->id)
             ->where('completed_at', $today)
             ->first();
 
-        // 3.Validar se nessa data já existe um registro
         if($log){
-            // 4.Se existir, remover o registro
             $log->delete();
+            $alert = 'warning';
             $message = 'Hábito desmarcado.';
         } else {
-            // 5.Se não existir, criar o registro
-            HabitLog::create([
-                'user_id' => Auth::user()->id,
-                'habit_id' => $habit->id,
-                'completed_at' => $today,
-            ]);
+            HabitLog::query()
+                ->create([
+                    'user_id' => Auth::user()->id,
+                    'habit_id' => $habit->id,
+                    'completed_at' => $today,
+                ]);
+            $alert = 'success';
             $message = 'Hábito concluído 👏';
         }
-        // 6.Retornar para a página anterior
         return redirect()
             ->route('habits.index')
-            ->with('success', $message);
+            ->with($alert, $message);
     }
 
     public function history(?int $year = null): View

@@ -1,15 +1,8 @@
 <x-layout>
   <main class="max-w-5xl mx-auto py-10 min-h-[calc(100vh-160px)] px-4">
 
+    {{-- NAVBAR --}}
     <x-navbar />
-
-    @session('success')
-      <div class="flex">
-        <p class="bg-green-100 border-2 border-green-400 text-green-700 p-3 mb-4">
-          {{ session('success') }}
-        </p>
-      </div>
-    @endsession
 
     <div>
       <h2 class="text-lg mt-8 mb-2">

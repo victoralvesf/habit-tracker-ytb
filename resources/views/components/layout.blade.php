@@ -14,7 +14,7 @@
     @vite('resources/css/app.css')
   </head>
 
-  <body class="bg-[#FFEDD6] font-mono">
+  <body class="bg-[#FFEDD6] font-mono relative">
     {{-- HEADER --}}
     <x-header />
 
@@ -22,5 +22,10 @@
 
     {{-- FOOTER --}}
     <x-footer />
+
+    {{-- TOAST --}}
+    <x-toast />
+
+    <script type="module" src="{{ Vite::asset('resources/js/app.js') }}"></script>
   </body>
 </html>
