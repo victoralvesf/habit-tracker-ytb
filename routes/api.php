@@ -9,4 +9,10 @@ Route::get('/ping', function () {
 
 Route::prefix('v1')->group(function(){
     Route::post('/login', [TokenController::class, 'login'])->name('auth.store');
+
+    // AUTH
+    Route::middleware('auth:sanctum')->group(function(){
+        Route::post('/logout', [TokenController::class, 'logout'])->name('auth.destroy');
+        Route::post('/logout-all', [TokenController::class, 'logoutAll'])->name('auth.logoutAll');
+    });
 });
